@@ -1,3 +1,4 @@
+using Katil.UserResolverService;
 using Microsoft.EntityFrameworkCore;
 
 namespace Katil.Data.Model.EntityFramework
@@ -7,7 +8,7 @@ namespace Katil.Data.Model.EntityFramework
 		protected override AppDbContext CreateNewInstance(
 			DbContextOptions<AppDbContext> options)
 		{
-			return new AppDbContext(options);
+			return new AppDbContext(options, null);
 		}
 	}
 }
