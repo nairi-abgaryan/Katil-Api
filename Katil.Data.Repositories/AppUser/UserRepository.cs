@@ -69,7 +69,7 @@ namespace Katil.Data.Repositories.AppUser
         public async Task<User> GetAdminUser(int userId)
         {
             var user = await Context.Users.SingleOrDefaultAsync(u =>
-                u.Id == userId && u.RoleId == (int)Roles.AdminUser);
+                u.Id == userId && u.RoleId == (int)StaffRoles.AdminUser);
 
             return user;
         }
