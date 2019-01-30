@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AutoMapper;
 using Katil.Common.Utilities;
 using Katil.WebAPI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,6 +37,7 @@ namespace Katil.WebApi
 				.AddCustomDbContext(Configuration)
 				.AddCustomSwagger(Configuration)
 				.AddAuthentication(Configuration)
+				.AddMapper()
 			;
 		}
 

@@ -1,11 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Katil.Business.Entities.Models.User;
+using Katil.Business.Services.Mapping;
 using Katil.Business.Services.TokenServices;
 using Katil.Business.Services.UserServices;
+using Katil.Business.Services.Validation;
 using Katil.Common.Utilities;
 using Katil.Data.Model;
 using Katil.Data.Repositories.AppUser;
 using Katil.Data.Repositories.UnitOfWork;
+using Katil.UserResolverService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -32,7 +39,8 @@ namespace Katil.WebAPI
         public static IServiceCollection AddCustomMvc(this IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMvc();
+            services.AddMvc().AddFluentValidation();
+            services.AddTransient<IValidator<UserRegistrationsRequest>, UserValidator>();
 
             return services;
         }
@@ -93,11 +101,19 @@ namespace Katil.WebAPI
         public static IServiceCollection AddCustomIntegrations(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+            services.AddSingleton<IUserResolver, UserResolver>();
+            
             services.AddScoped<IAuthenticateService, AuthenticateService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IUserService, UserService>();
 
+            return services;
+        }      
+        public static IServiceCollection AddFluentValidation(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddMvc().AddFluentValidation();
+            
+            
             return services;
         }      
         
@@ -135,6 +151,15 @@ namespace Katil.WebAPI
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<AppDbContext>(c => c.UseNpgsql(connectionString, b => b.MigrationsAssembly("Katil.Data.Model")), ServiceLifetime.Scoped);
 
+            return services;
+        }
+        
+        public static IServiceCollection AddMapper(this IServiceCollection services)
+        {
+            Mapper.Reset();
+            services.AddAutoMapper();
+            MappingProfile.Init();
+            
             return services;
         }
     }
