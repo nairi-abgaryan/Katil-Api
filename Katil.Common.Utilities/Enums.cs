@@ -2,10 +2,14 @@
 
 namespace Katil.Common.Utilities
 {
-    public enum Roles
+    public enum StaffRoles
     {
         [Description("ROLE_ADMIN")]
-        AdminUser = 1,
+        AdminUser = 1
+    }
+    
+    public enum Roles
+    {
         [Description("ROLE_USER")]
         User = 2
     }
