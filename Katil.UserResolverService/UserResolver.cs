@@ -14,7 +14,7 @@ namespace Katil.UserResolverService
 
         public int GetUserId()
         {
-            var userId = _accessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = _accessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return int.Parse(userId ?? "0");
         }
     }
