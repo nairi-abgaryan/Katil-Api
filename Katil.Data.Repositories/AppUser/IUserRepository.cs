@@ -19,6 +19,8 @@ namespace Katil.Data.Repositories.AppUser
         Task<List<User>> GetUsersByRole(int systemUserRoleId);
 
         Task<User> GetAdminUser(int userId);
+        
+        User FindUserByEmail(string email);
 
         Task<User> GetUserWithInternalRolesAsync(int userId);
     }

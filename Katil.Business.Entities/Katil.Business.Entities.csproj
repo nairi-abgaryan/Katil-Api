@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Katil.Common.Utilities\Katil.Common.Utilities.csproj" />
+      <ProjectReference Include="..\Katil.Data.Model\Katil.Data.Model.csproj" />
     </ItemGroup>
 
     <ItemGroup>

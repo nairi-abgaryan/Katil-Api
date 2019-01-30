@@ -74,6 +74,13 @@ namespace Katil.Data.Repositories.AppUser
             return user;
         }
 
+        public User FindUserByEmail(string email)
+        {
+            var user = Context.Users.SingleOrDefault(u => u.Email == email);
+
+            return user;
+        }
+
         public async Task<User> GetUserWithInternalRolesAsync(int userId)
         {
             var user = await Context.Users
@@ -81,5 +88,6 @@ namespace Katil.Data.Repositories.AppUser
 
             return user;
         }
+        
     }
 }

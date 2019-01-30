@@ -1,6 +1,5 @@
 using FluentValidation;
 using Katil.Business.Entities.Models.User;
-using Katil.Data.Model;
 using Katil.Data.Repositories.UnitOfWork;
 
 namespace Katil.Business.Services.Validation
@@ -17,8 +16,7 @@ namespace Katil.Business.Services.Validation
 		
 		public bool BeUniqueEmail(string email)
 		{
-			
-			return UnitOfWork.UserRepository.GetUserWithFullInfo(1) == null;
+			return UnitOfWork.UserRepository.FindUserByEmail(email) == null;
 		}
 	}
 }
