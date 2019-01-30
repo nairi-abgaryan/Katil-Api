@@ -26,5 +26,18 @@ namespace Katil.WebApi.Controllers
             var users =  _userService.GetAll();
             return Ok(users);
         }
+        
+        [HttpPost("")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Create([FromBody]UserRegistrationsRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var newUser = await _userService.CreateUser(request);
+            return Ok(newUser);
+        }
     }
 }
