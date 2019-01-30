@@ -2,7 +2,7 @@ using System;
 
 namespace Katil.Data.Model
 {
-	public class BaseEntity
+	public abstract class BaseEntity
 	{
 		public DateTime? CreatedDate { get; set; }
 

@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Katil.Common.Utilities\Katil.Common.Utilities.csproj" />
+      <ProjectReference Include="..\Katil.UserResolverService\Katil.UserResolverService.csproj" />
     </ItemGroup>
 
     <ItemGroup>
